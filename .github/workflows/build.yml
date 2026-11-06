@@ -43,17 +43,14 @@ jobs:
         pip install --upgrade pip
         pip install cython==0.29.36
         pip install buildozer
-        pip install kivy
 
-    - name: Build with Buildozer
+    - name: Run Buildozer Build
       run: |
-        # محاولة البناء مع تكرار العملية تلقائياً إذا حصل انقطاع بالاتصال
-        for i in {1..3}; do
-          buildozer -v android debug && break || echo "فشلت المحاولة $i، جاري إعادة المحاولة..."
-        done
+        buildozer -v android debug
 
     - name: Upload APK artifact
       uses: actions/upload-artifact@v4
       with:
-        name: package
+        name: my-app-apk
         path: bin/*.apk
+        
